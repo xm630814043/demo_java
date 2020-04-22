@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script>
+    alert("顶部脚本");
+    var 书名="《JavaScript从入门到精通》";
+    姓名="张三";
+    function 彩蛋(谁){
+        document.write("<h1>" + 谁 + "</h1><p> 欢迎你学习 " + 书名 + "。</p>");
+    }
+    彩蛋(姓名);
+</script>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script>
+        alert("头部脚本");
+        d = new Date();  //获取当前日期和时间
+        document.write(d.toString());  // 显示日期
+        function toStr(a){
+            document.write("<h1>" + 姓名 + "</h1><p> 学习" + 书名 + a + "。</p>")
+            return a.toString();
+        }
+        toStr("第一天")
+    </script>
+</head>
+<body>
+<h1>网页标题</h1>
+<script>
+    alert("页面脚本");
+</script>
+<p>正文内容</p>
+</body>
+<script>
+    alert("底部脚本");
+</script>
+</html>

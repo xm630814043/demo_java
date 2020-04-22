@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个JavaScript程序</title>
+    <!--异步加载
+    默认情况下，网页都是同步加载外部 JavaScript 文件的，如果 JavaScript 文件比较大， 就会影响后面 HTML 代码的解析。
+    上面提到一种解决方法：就是最后加载 JavaScript 文件。
+    现在可以为 <script> 标签设置 async 属性，让浏览器异步加载 JavaScript 文件，即在加载 JavaScript 文件时，
+    浏览器不会暂停，而是继续解析。这样能节省时间，提升响应速度。
+    -->
+    <script type="text/javascript" async src="dowe1.js" >
+        document.write("<h1>Hi JavaScript! </h1>")
+    </script>
+    <!-- 文件延迟
+    —般情况下，在文档的 <head> 标签中包含 JavaScript 脚本，或者导入的 JavaScript 文件。
+    这意味着必须等到全部 JavaScript 代码都被加载、解析和执行完以后，才能继续解析后面的 HTML 部分。
+    如果加载的 JavaScript 文件很大， HTML 文档解析就容易出现延迟。
+    为了避免这个问题，在开发 Web 应用程序时，建议把导入 JavaScript 文件的操作放在 <body> 后面，
+    让浏览器先 将网页内容解析并呈现出来后，再去加载 JavaScript 文件，以便加快网页响应速度
+       <script> 标签有一个布尔型属性 defer，设置该属性能够将 JavaScript 文件延迟到页面解析完毕后再运行
+   -->
+    <script type="text/javascript" defer src="dowe1.js">
+    </script>
+</head>
+<body>
+<h1>网页标题</h1>
+<p>正文内容</p>
+</body>
+</html>

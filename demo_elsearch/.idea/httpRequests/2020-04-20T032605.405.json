@@ -1,0 +1,4 @@
+{
+  "error": "Incorrect HTTP method for uri [/] and method [POST], allowed: [HEAD, GET, DELETE]",
+  "status": 405
+}

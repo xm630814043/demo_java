@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <table class="table table-striped table-hover table-bordered ">
+          <thead>
+           <th style="text-align: center">ID</th>
+           <th style="text-align: center">名称</th>
+           <th style="text-align: center">密码</th>
+         </thead>
+
+         <tbody id="sortable">
+         </tbody>
+        </table> <!--分页部分-->
+        <div style="margin: 20px 0px 10px 0;">
+         <table style="margin: 0 auto;">
+             <tr>
+                 <td>
+                     <div id="pagination" class="pagination"></div>
+                 </td>
+             </tr>
+         </table>
+        </div>
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+        <script type="text/javascript" src="/static/js/jquery.paginationNew.js"></script>     
+        <script type="text/javascript">
+            //页面的初始化
+            $(function () {
+                //分页数据
+                InitData();
+            })
+            //使用分页插件pagination分页显示1
+            function InitData() {
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "/query",
+                    data: {
+                        pageno:0
+                    },
+                    success: function (data) {
+                        console.log('首页数据')
+                        console.log(data)
+                        var Count = data.Count
+                        var PageSize = data.PageSize;
+                        var Page =data.Page;
+                        $("#pagination").pagination(Count, {
+                            callback: pageselectCallback,
+                            num_edge_entries: 1,
+                            prev_text: "上一页",
+                            prev_show_always: true,
+                            next_text: "下一页",
+                            next_show_always: true,
+                            items_per_page: PageSize,
+                            current_page: Page,
+                            link_to: '#__aurl=!/query',
+                            num_display_entries: 4
+                        });
+                    }
+                });
+            }
+
+            //使用分页插件分页后的回调函数2
+            function pageselectCallback(page_id, jq) {
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "/query",
+                    data: {
+                        pageno: (parseInt(page_id) + parseInt(1)),
+                    },
+                    success: function (data) {
+                        console.log('下一页的数据')
+                        console.log(data)
+                        console.log(data.DataList)
+                        htmlData(data.DataList)
+                    }
+                });
+            }
+        function htmlData(data){
+             var html='';
+             for(var i=0;i<data.length;i++){
+                html+='<tr class="sort-item"  id="module_'+data[i].Id+'" value="'+data[i].Id+'">';
+                html+='   <td style="text-align: center;width: 50px;" ><strong>'+data[i].ID+'</strong></td>';
+                html+='   <td style="text-align: center;width: 50px;" ><strong>'+data[i].Name+'</strong></td>';
+                html+='   <td style="text-align: center;width: 50px;" ><strong>'+data[i].Pwd+'</strong></td>';
+                html+='</tr>';
+             }
+
+             $("#sortable").html(html);
+        }
+        </script>
+</body>
+</html>
